@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TrainTicketBooking.Data.ScheduleModel>
+@{
+    ViewBag.Title = "Schedule";
+}
+<br />
+<h2><b>Schedule</b></h2>
+
+<table class="table table-bordered table-striped" id="dtable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Stations.StationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trains.TrainName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureTime)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stations.StationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trains.TrainName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureTime)
+                </td>
+              
+            </tr>
+        }
+    </tbody>
+</table>

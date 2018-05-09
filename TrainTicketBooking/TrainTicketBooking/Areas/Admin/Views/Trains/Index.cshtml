@@ -1,0 +1,95 @@
+﻿@model IEnumerable<TrainTicketBooking.Data.TrainsModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="box">
+    <div class="box-header">
+        <h2 class="box-title">Train Index</h2>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-bordered table-striped" id="dtable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Routes.RouteName)
+                    </th>
+                    <th>
+                        Start Station
+                    </th>
+                    <th>
+                        End Station
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TrainName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TrainType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Site)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndTime)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Routes.RouteName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stations1.StationName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stations2.StationName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrainName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrainType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Site)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndTime)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#dtable").DataTable();
+
+        });
+    </script>
+
+}

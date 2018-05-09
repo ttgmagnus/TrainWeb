@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TrainTicketBooking.Data.TicketModel>
+@{
+    ViewBag.Title = "OrderedTickets";
+}
+
+<h2>Ordered Tickets</h2>
+
+<table class="table table-bordered table-striped" id="dtable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Trains.TrainName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StationFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StationTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trains.TrainName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StationFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StationTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TravelDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerID)
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

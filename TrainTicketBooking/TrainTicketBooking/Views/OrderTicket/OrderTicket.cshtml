@@ -1,0 +1,73 @@
+﻿@model TrainTicketBooking.Models.OrderTicketVM
+@{
+    ViewBag.Title = "OrderTicket";
+}
+<style>
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+    }
+</style>
+<br />
+<div class="container">
+    @if (ViewBag.Success != null)
+    {
+    <div class="alert alert-success">
+        @ViewBag.Success
+    </div>
+    }
+    <div class="card border-dark mb-3" style="max-width: 20rem;">
+        <div class="card-header bg-dark"> <h2 style="color:white"><b>Order Ticket Now</b></h2></div>
+        <div class="card-body">
+            <form action="~/OrderTicket/OrderTicket" method="post">
+
+                <div class="form-group">
+                    <div class="">
+                        @Html.LabelFor(model => model.TrainId, "Train", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("TrainId", (IEnumerable<SelectListItem>)ViewBag.TrainId, null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TrainId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        @Html.LabelFor(model => model.StationFrom, "Travel From", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("StationFrom", (IEnumerable<SelectListItem>)ViewBag.StationFrom, null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.StationFrom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="">
+                        @Html.LabelFor(model => model.StationTo, "Travel To", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("StationTo", (IEnumerable<SelectListItem>)ViewBag.StationTo, null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.StationTo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <input type="hidden" name="OrderDate" class="form-control" value="@DateTime.Now.ToShortDateString()">
+                <!-- Date -->
+                <div class="form-group">
+                    <label>Travel Date:</label>
+                    <input name="TravelDate" class="form-control" id="datepicker">
+
+                    <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        });
+
+    </script>
+
+}

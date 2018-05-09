@@ -1,0 +1,89 @@
+﻿@model TrainTicketBooking.Data.CarriageModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="box">
+    <div class="box-header">
+        <h2 class="box-title"> >Details</h2>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <div>
+            <h4>CarriageModel</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                @*<dt>
+                    @Html.DisplayNameFor(model => model.Tickets.TrainType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tickets.TrainType)
+                </dd>*@
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Type)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Type)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Weight)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Weight)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Height)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Height)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Width)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Width)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Length)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Length)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+        </div>
+</div>

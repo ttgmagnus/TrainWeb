@@ -1,0 +1,40 @@
+﻿@model TrainTicketBooking.Data.RoutesModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="box">
+    <div class="box-header">
+        <h2 class="box-title">Routes Details</h2>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+        <div>
+           
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.RouteName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RouteName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RouteDescription)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RouteDescription)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+        </div>
+</div>
