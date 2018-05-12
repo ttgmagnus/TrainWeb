@@ -10,18 +10,29 @@ using TrainTicketBooking.Data;
 
 namespace TrainTicketBooking.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// stationController controls http and db requests related to train station.
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class StationController : Controller
     {
+        //create a database context.
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Station
+        /// <summary>
+        /// ActionResult returns values of station back to view. 
+        /// </summary>
+        /// <returns>Returns db.stationModels as a list to view.</returns>
         public ActionResult Index()
         {
             return View(db.StationModels.ToList());
         }
 
-        // GET: Admin/Station/Details/5
+        /// <summary>
+        /// Checks if it is possible to view details on station from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The details stationModel view with datavalues that have ID as PK</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,15 +47,23 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(stationModel);
         }
 
-        // GET: Admin/Station/Create
+        /// <summary>
+        /// Opens a new create station view
+        /// </summary>
+        /// <returns>Return a create station view.</returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Station/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates station data and sends to database.
+        /// 
+        /// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="stationModel">List of database values.</param>
+        /// <returns>The index station view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,StationName,StationCode")] StationModel stationModel)
@@ -59,7 +78,11 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(stationModel);
         }
 
-        // GET: Admin/Station/Edit/5
+        /// <summary>
+        /// Checks if it is possible to edit station from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The edit station view with a list of datavalues that have ID as PK</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,9 +97,14 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(stationModel);
         }
 
-        // POST: Admin/Station/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edit station data from database based on the list stationModel.
+        /// 
+        /// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="stationModel">List of database values.</param>
+        /// <returns>The index station view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,StationName,StationCode")] StationModel stationModel)
@@ -90,7 +118,11 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(stationModel);
         }
 
-        // GET: Admin/Station/Delete/5
+        /// <summary>
+        /// Checks if it is possible to delete station from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The delete station view with a list of datavalues that have ID as PK</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,7 +137,11 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(stationModel);
         }
 
-        // POST: Admin/Station/Delete/5
+        /// <summary>
+        /// Delete station data from database that has ID as PK
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database</param>
+        /// <returns>The index station view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -116,6 +152,10 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Release unmanaged database resources 
+        /// </summary>
+        /// <param name="disposing">Bool value true or false</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

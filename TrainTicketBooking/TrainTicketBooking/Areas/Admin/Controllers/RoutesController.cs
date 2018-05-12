@@ -10,18 +10,29 @@ using TrainTicketBooking.Data;
 
 namespace TrainTicketBooking.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// RoutesController controls http and db requests related to train routes.
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class RoutesController : Controller
     {
+        // create a database context.
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Routes
+        /// <summary>
+        /// ActionResult returns values of routes back to view. 
+        /// </summary>
+        /// <returns>Returns db.RoutesModels as a list to view.</returns>
         public ActionResult Index()
         {
             return View(db.RoutesModels.ToList());
         }
 
-        // GET: Admin/Routes/Details/5
+        /// <summary>
+        /// Checks if it is possible to view details on routes from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The details routesModel view with datavalues that have ID as PK</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,15 +47,23 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(routesModel);
         }
 
-        // GET: Admin/Routes/Create
+        /// <summary>
+        /// Opens a new create route view
+        /// </summary>
+        /// <returns>Return a create route view.</returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Routes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates routes data and sends to database.
+        /// 
+        /// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="routesModel">List of database values.</param>
+        /// <returns>The index route view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,RouteName,RouteDescription")] RoutesModel routesModel)
@@ -58,8 +77,12 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
 
             return View(routesModel);
         }
-
-        // GET: Admin/Routes/Edit/5
+        
+        /// <summary>
+        /// Checks if it is possible to edit routes from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The edit routes view with a list of datavalues that have ID as PK</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,9 +97,14 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(routesModel);
         }
 
-        // POST: Admin/Routes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edit routes data from database based on the list routesModel.
+        /// 
+        /// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="routesModel">List of database values.</param>
+        /// <returns>The index route view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,RouteName,RouteDescription")] RoutesModel routesModel)
@@ -89,8 +117,12 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             }
             return View(routesModel);
         }
-
-        // GET: Admin/Routes/Delete/5
+        
+        /// <summary>
+        /// Checks if it is possible to delete routes from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The delete routes view with a list of datavalues that have ID as PK</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,8 +136,12 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             }
             return View(routesModel);
         }
-
-        // POST: Admin/Routes/Delete/5
+        
+        /// <summary>
+        /// Delete route data from database that has ID as PK
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database</param>
+        /// <returns>The index route view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -116,6 +152,10 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Release unmanaged database resources 
+        /// </summary>
+        /// <param name="disposing">Bool value true or false</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

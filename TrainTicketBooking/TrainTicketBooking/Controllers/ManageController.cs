@@ -39,7 +39,7 @@ namespace TrainTicketBooking.Controllers
         }
 
         /// <summary>
-        /// Setter and Getter for the signInManager
+        /// Setter and Getter for the signInManager.
         /// </summary>
         public ApplicationSignInManager SignInManager
         {
