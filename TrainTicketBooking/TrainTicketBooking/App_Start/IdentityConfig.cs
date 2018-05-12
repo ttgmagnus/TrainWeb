@@ -15,8 +15,17 @@ using TrainTicketBooking.Models;
 
 namespace TrainTicketBooking
 {
+    /// <summary>
+    /// EmailService uses IIdentityMessageService to send an email.
+    /// </summary>
     public class EmailService : IIdentityMessageService
     {
+        /// <summary>
+        /// Task SendAsync takes an email service as a message and uses the method IdentityMessage 
+        /// in IIdentityMessageService to send the results as an Email.
+        /// </summary>
+        /// <param name="message">Inbut email service</param>
+        /// <returns></returns>
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
@@ -24,8 +33,17 @@ namespace TrainTicketBooking
         }
     }
 
+    /// <summary>
+    /// SmsService used IIdentityMessageService to send sms
+    /// </summary>
     public class SmsService : IIdentityMessageService
     {
+        /// <summary>
+        /// Task SendAsync takes an sms service as a message and uses the method IdentityMessage
+        /// in IIdentityMessageService to send the results as a text message.
+        /// </summary>
+        /// <param name="message">Input sms service</param>
+        /// <returns></returns>
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your SMS service here to send a text message.
@@ -33,14 +51,27 @@ namespace TrainTicketBooking
         }
     }
 
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+    /// <summary>
+    /// ApplicationUserManager configure the application user manager used in this application. 
+    /// UserManager is defined in Asp.Net.Identity 
+    /// </summary>
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+        /// <summary>
+        /// ApplicationUserManager uses the interface IUserStore to store basic user management apis.
+        /// </summary>
+        /// <param name="store"></param>
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
         }
 
+        /// <summary>
+        /// This method creates the basic logic for the application
+        /// </summary>
+        /// <param name="options">Configure options</param>
+        /// <param name="context">Create the context name of the OWIN environment dictionary</param>
+        /// <returns></returns>
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
@@ -89,7 +120,9 @@ namespace TrainTicketBooking
         }
     }
 
-    // Configure the application sign-in manager which is used in this application.
+    /// <summary>
+    /// Configure the application sign-in manager which is used in this application.
+    /// </summary>
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
@@ -97,16 +130,19 @@ namespace TrainTicketBooking
         {
         }
 
+        // Creates and return a Manager User ID
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
         {
             return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
         }
 
+        // Creates and returns Manager sign in
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
 
+        // Creates an empty storage
        public class ApplicationRoleManager : RoleManager<ApplicationRole>
        {
         public ApplicationRoleManager(IRoleStore<ApplicationRole, string> roleStore)
@@ -114,6 +150,8 @@ namespace TrainTicketBooking
         {
 
         }
+        
+        // Stores the data in storage
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
             return new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));

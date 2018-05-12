@@ -10,9 +10,16 @@ using TrainTicketBooking.Models;
 
 namespace TrainTicketBooking
 {
+    /// <summary>
+    /// Class that desides what happens at startup.
+    /// </summary>
     public partial class Startup
     {
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
+        /// <summary>
+        /// ConfigureAuth desides the owin context and cookie authentication
+        /// </summary>
+        /// <param name="app">The app</param>
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request

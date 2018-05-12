@@ -13,6 +13,9 @@ using TrainTicketBooking.Models;
 
 namespace TrainTicketBooking.Controllers
 {
+    /// <summary>
+    /// Controller for that manages the application
+    /// </summary>
     [Authorize]
     public class ManageController : Controller
     {
@@ -24,12 +27,20 @@ namespace TrainTicketBooking.Controllers
         {
         }
 
+        /// <summary>
+        /// Stores the userManager and the signIn for this instance of the application.
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
+        /// <summary>
+        /// Setter and Getter for the signInManager
+        /// </summary>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -42,6 +53,9 @@ namespace TrainTicketBooking.Controllers
             }
         }
 
+        /// <summary>
+        /// Setter and Getter for the userManager.
+        /// </summary>
         public ApplicationUserManager UserManager
         {
             get
@@ -54,8 +68,11 @@ namespace TrainTicketBooking.Controllers
             }
         }
 
-        //
-        // GET: /Manage/Index
+        /// <summary>
+        /// Manages the message based on id to deside wich message to return to the view.
+        /// </summary>
+        /// <param name="message">id of the message</param>
+        /// <returns>a message to the view based on the id of the message</returns>
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -68,6 +85,7 @@ namespace TrainTicketBooking.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            // based on the id of the message desides what view to return.
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -103,8 +121,10 @@ namespace TrainTicketBooking.Controllers
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 
-        //
-        // GET: /Manage/AddPhoneNumber
+        /// <summary>
+        /// Return the view result of the action AddPhoneNumber.
+        /// </summary>
+        /// <returns>view</returns>
         public ActionResult AddPhoneNumber()
         {
             return View();
