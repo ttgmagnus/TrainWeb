@@ -7,6 +7,9 @@ using TrainTicketBooking.Data;
 
 namespace TrainTicketBooking.Entities
 {
+    /// <summary>
+    /// The configuration for train entities derived from corresponding models. 
+    /// </summary>
     public class ScheduleConfiguration: EntityTypeConfiguration<ScheduleModel>
     {
         public ScheduleConfiguration()

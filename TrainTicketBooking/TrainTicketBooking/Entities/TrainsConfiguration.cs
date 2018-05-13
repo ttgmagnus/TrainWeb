@@ -7,20 +7,23 @@ using TrainTicketBooking.Data;
 
 namespace TrainTicketBooking.Entities
 {
+    /// <summary>
+    /// The configuration for train entities derived from corresponding models. 
+    /// </summary>
     public class TrainsConfiguration: EntityTypeConfiguration<TrainsModel>
     {
         public TrainsConfiguration()
         {
 
             this.HasRequired<RoutesModel>(s => s.Routes)
-           .WithMany(g => g.Trains)
-           .HasForeignKey<int>(s => s.RouteId);
+            .WithMany(g => g.Trains)
+            .HasForeignKey<int>(s => s.RouteId);
             this.HasRequired<StationModel>(s => s.Stations1)
-         .WithMany(g => g.Trains1)
-         .HasForeignKey<int>(s => s.StartStation);
+            .WithMany(g => g.Trains1)
+            .HasForeignKey<int>(s => s.StartStation);
             this.HasRequired<StationModel>(s => s.Stations2)
-         .WithMany(g => g.Trains2)
-         .HasForeignKey<int>(s => s.EndStation);
+            .WithMany(g => g.Trains2)
+            .HasForeignKey<int>(s => s.EndStation);
         }
     }
 }

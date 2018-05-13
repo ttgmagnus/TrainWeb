@@ -7,6 +7,9 @@ using TrainTicketBooking.Models;
 
 namespace TrainTicketBooking.Entities
 {
+    /// <summary>
+    /// The configuration for train entities derived from corresponding models. 
+    /// </summary>
     public class ApplicationUserConfiguration : EntityTypeConfiguration<ApplicationUser>
     {
         public ApplicationUserConfiguration()
