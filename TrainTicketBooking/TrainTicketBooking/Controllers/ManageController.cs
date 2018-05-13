@@ -14,7 +14,7 @@ using TrainTicketBooking.Models;
 namespace TrainTicketBooking.Controllers
 {
     /// <summary>
-    /// Controller for that manages the application
+    /// Controller that manages the application
     /// </summary>
     [Authorize]
     public class ManageController : Controller
@@ -99,6 +99,12 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Manage/RemoveLogin
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginProvider"></param>
+        /// <param name="providerKey"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
@@ -130,8 +136,13 @@ namespace TrainTicketBooking.Controllers
             return View();
         }
 
-        //
+        
         // POST: /Manage/AddPhoneNumber
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
@@ -154,8 +165,12 @@ namespace TrainTicketBooking.Controllers
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
 
-        //
+        
         // POST: /Manage/EnableTwoFactorAuthentication
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
@@ -169,8 +184,12 @@ namespace TrainTicketBooking.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
+        
         // POST: /Manage/DisableTwoFactorAuthentication
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
@@ -184,8 +203,13 @@ namespace TrainTicketBooking.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
+        
         // GET: /Manage/VerifyPhoneNumber
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
@@ -193,8 +217,13 @@ namespace TrainTicketBooking.Controllers
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
-        //
+        
         // POST: /Manage/VerifyPhoneNumber
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
@@ -218,8 +247,12 @@ namespace TrainTicketBooking.Controllers
             return View(model);
         }
 
-        //
+        
         // POST: /Manage/RemovePhoneNumber
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
@@ -237,15 +270,24 @@ namespace TrainTicketBooking.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
-        //
+        
         // GET: /Manage/ChangePassword
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        //
+        
         // POST: /Manage/ChangePassword
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -268,15 +310,24 @@ namespace TrainTicketBooking.Controllers
             return View(model);
         }
 
-        //
+        
         // GET: /Manage/SetPassword
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult SetPassword()
         {
             return View();
         }
 
-        //
+        
         // POST: /Manage/SetPassword
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
@@ -300,8 +351,13 @@ namespace TrainTicketBooking.Controllers
             return View(model);
         }
 
-        //
+        
         // GET: /Manage/ManageLogins
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -323,8 +379,13 @@ namespace TrainTicketBooking.Controllers
             });
         }
 
-        //
+        
         // POST: /Manage/LinkLogin
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
@@ -333,8 +394,12 @@ namespace TrainTicketBooking.Controllers
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
-        //
+        
         // GET: /Manage/LinkLoginCallback
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
@@ -345,7 +410,13 @@ namespace TrainTicketBooking.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
+        
         // GET: UpdateProfile/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult UpdateProfile(string id)
         {
             if (id == null)
@@ -359,14 +430,25 @@ namespace TrainTicketBooking.Controllers
             }
             return View(applicationUser);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult OrderedTickets()
         {
             var model = db.TicketModels.Where(x => x.CustomerID == User.Identity.Name).Include(t=>t.Trains);
             return View(model.ToList());
         }
+        
         // POST: UpdateProfile/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="applicationUser"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UpdateProfile([Bind(Include = "Id,FirstName,LastName,Gender,BirthDate,Address,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
@@ -386,6 +468,11 @@ namespace TrainTicketBooking.Controllers
             }
             return View(applicationUser);
         }
+
+        /// <summary>
+        /// Release _userManager resource if not empty.
+        /// </summary>
+        /// <param name="disposing">bool value true or false</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

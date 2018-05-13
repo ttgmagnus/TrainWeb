@@ -12,6 +12,9 @@ using TrainTicketBooking.Models;
 
 namespace TrainTicketBooking.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Authorize]
     public class AccountController : Controller
     {
@@ -22,12 +25,20 @@ namespace TrainTicketBooking.Controllers
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -40,6 +51,9 @@ namespace TrainTicketBooking.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ApplicationUserManager UserManager
         {
             get
@@ -54,6 +68,11 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/Login
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -63,6 +82,12 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/Login
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -93,6 +118,13 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/VerifyCode
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="returnUrl"></param>
+        /// <param name="rememberMe"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -106,6 +138,11 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/VerifyCode
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -136,6 +173,10 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/Register
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -144,6 +185,11 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/Register
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -174,6 +220,12 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/ConfirmEmail
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -187,6 +239,10 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/ForgotPassword
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
@@ -195,6 +251,11 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/ForgotPassword
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -223,6 +284,10 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/ForgotPasswordConfirmation
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
@@ -231,6 +296,11 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/ResetPassword
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
@@ -239,6 +309,11 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/ResetPassword
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -265,6 +340,10 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/ResetPasswordConfirmation
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
@@ -273,6 +352,12 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/ExternalLogin
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -284,6 +369,12 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/SendCode
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <param name="rememberMe"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -299,6 +390,11 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/SendCode
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -319,6 +415,11 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -349,6 +450,12 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/ExternalLoginConfirmation
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -387,6 +494,10 @@ namespace TrainTicketBooking.Controllers
 
         //
         // POST: /Account/LogOff
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -397,12 +508,20 @@ namespace TrainTicketBooking.Controllers
 
         //
         // GET: /Account/ExternalLoginFailure
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
 
+        /// <summary>
+        /// Release _userManager and _signInManager if resources are not empty on true 
+        /// </summary>
+        /// <param name="disposing">boole value true og false</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
