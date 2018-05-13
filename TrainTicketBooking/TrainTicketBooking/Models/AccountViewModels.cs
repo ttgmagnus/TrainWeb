@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TrainTicketBooking.Models
 {
+    /// <summary>
+    /// Build ExternalLoginConfirmationViewModel from properties.
+    /// </summary>
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -10,11 +13,17 @@ namespace TrainTicketBooking.Models
         public string Email { get; set; }
     }
 
+    /// <summary>
+    /// Builds ExternalLoginListViewModel from properties.
+    /// </summary>
     public class ExternalLoginListViewModel
     {
         public string ReturnUrl { get; set; }
     }
 
+    /// <summary>
+    /// Builds SendCodeViewModel from properties.
+    /// </summary>
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -23,6 +32,9 @@ namespace TrainTicketBooking.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// Builds VerifyCodeViewModel from properties.
+    /// </summary>
     public class VerifyCodeViewModel
     {
         [Required]
@@ -39,6 +51,9 @@ namespace TrainTicketBooking.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// Builds ForgotViewModel from properties
+    /// </summary>
     public class ForgotViewModel
     {
         [Required]
@@ -46,6 +61,9 @@ namespace TrainTicketBooking.Models
         public string Email { get; set; }
     }
 
+    /// <summary>
+    /// Builds the loginViewModel from properties.
+    /// </summary>
     public class LoginViewModel
     {
         [Required]
@@ -62,6 +80,9 @@ namespace TrainTicketBooking.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// Builds RegistrerViewModel from properties.
+    /// </summary>
     public class RegisterViewModel
     {
         [Required]
@@ -95,6 +116,9 @@ namespace TrainTicketBooking.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// Builds ResetPasswordViewModel from properties.
+    /// </summary>
     public class ResetPasswordViewModel
     {
         [Required]
@@ -116,6 +140,9 @@ namespace TrainTicketBooking.Models
         public string Code { get; set; }
     }
 
+    /// <summary>
+    /// Builds ForgotPasswordViewModel from properties.
+    /// </summary>
     public class ForgotPasswordViewModel
     {
         [Required]
