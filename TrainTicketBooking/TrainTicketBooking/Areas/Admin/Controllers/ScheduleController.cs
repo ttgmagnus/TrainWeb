@@ -10,19 +10,30 @@ using TrainTicketBooking.Data;
 
 namespace TrainTicketBooking.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// ScheduleController controls http and db requests related to train schedule.
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class ScheduleController : Controller
     {
+        //create a database context.
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Schedule
+        /// <summary>
+        /// ActionResult returns values of schedule back to view. 
+        /// </summary>
+        /// <returns>Returns db.scheduleModels as a list to view.</returns>
         public ActionResult Index()
         {
             var scheduleModels = db.ScheduleModels.Include(s => s.Stations).Include(s => s.Trains);
             return View(scheduleModels.ToList());
         }
 
-        // GET: Admin/Schedule/Details/5
+        /// <summary>
+        /// Checks if it is possible to view details on schedule from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The details scheduleModel view with datavalues that have ID as PK</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,7 +48,10 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(scheduleModel);
         }
 
-        // GET: Admin/Schedule/Create
+        /// <summary>
+        /// Opens a new create schedule view
+        /// </summary>
+        /// <returns>Return a create schedule view.</returns>
         public ActionResult Create()
         {
             ViewBag.StationId = new SelectList(db.StationModels, "Id", "StationName");
@@ -45,9 +59,14 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Schedule/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates schedule data and sends to database.
+        /// 
+        /// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="scheduleModel">List of database values.</param>
+        /// <returns>The index schedule view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,TrainId,StationId,ArrivalTime,DepartureTime")] ScheduleModel scheduleModel)
@@ -64,7 +83,11 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(scheduleModel);
         }
 
-        // GET: Admin/Schedule/Edit/5
+        /// <summary>
+        /// Checks if it is possible to edit schedule from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The edit schedule view with a list of datavalues that have ID as PK</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,9 +104,14 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(scheduleModel);
         }
 
-        // POST: Admin/Schedule/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edit schedule data from database based on the list ScheduleModel.
+        /// 
+        /// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="ScheduleModel">List of database values.</param>
+        /// <returns>The index schedule view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,TrainId,StationId,ArrivalTime,DepartureTime")] ScheduleModel scheduleModel)
@@ -99,7 +127,11 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(scheduleModel);
         }
 
-        // GET: Admin/Schedule/Delete/5
+        /// <summary>
+        /// Checks if it is possible to delete schedule from database based on ID.
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database.</param>
+        /// <returns>The delete schedule view with a list of datavalues that have ID as PK</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,7 +146,11 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return View(scheduleModel);
         }
 
-        // POST: Admin/Schedule/Delete/5
+        /// <summary>
+        /// Delete schedule data from database that has ID as PK
+        /// </summary>
+        /// <param name="id">ID corresponds to PK in database</param>
+        /// <returns>The index schedule view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -125,6 +161,10 @@ namespace TrainTicketBooking.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Release unmanaged database resources 
+        /// </summary>
+        /// <param name="disposing">Bool value true or false</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

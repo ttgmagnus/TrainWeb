@@ -6,6 +6,9 @@ using System.Web;
 
 namespace TrainTicketBooking.Models
 {
+    /// <summary>
+    /// Set the application role whether administrator or user
+    /// </summary>
     public class ApplicationRoleVM
     {
         public string Id { get; set; }

@@ -5,7 +5,11 @@ namespace TrainTicketBooking
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
+        /// <summary>
+        /// Bundling is a way ASP.NET use to improve request load time.
+        /// For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
+        /// </summary>
+        /// <param name="bundles">Input Bundles</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(

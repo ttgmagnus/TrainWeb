@@ -7,8 +7,15 @@ using System.Web.Routing;
 
 namespace TrainTicketBooking
 {
+    /// <summary>
+    /// Creates a route configuration
+    /// </summary>
     public class RouteConfig
     {
+        /// <summary>
+        /// Defines the routes the application uses. 
+        /// </summary>
+        /// <param name="routes">The name of collectino of routes to be used</param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
