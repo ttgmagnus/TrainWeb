@@ -16,7 +16,7 @@ using TrainTicketBooking.Models;
 namespace TrainTicketBooking.Areas.Admin.Controllers
 {
     /// <summary>
-    /// UserController controls http and db requests related to user.
+    /// UserController controls http and db requests related to user admin.
     /// </summary>
     [Authorize(Roles = "Admin")]
     public class UserController : Controller

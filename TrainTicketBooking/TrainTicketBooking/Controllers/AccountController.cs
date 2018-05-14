@@ -13,7 +13,7 @@ using TrainTicketBooking.Models;
 namespace TrainTicketBooking.Controllers
 {
     /// <summary>
-    /// 
+    /// Controllers for the Account.
     /// </summary>
     [Authorize]
     public class AccountController : Controller
@@ -26,7 +26,7 @@ namespace TrainTicketBooking.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Constructor that sets Usermanager and SignInManager.
         /// </summary>
         /// <param name="userManager"></param>
         /// <param name="signInManager"></param>
@@ -37,7 +37,7 @@ namespace TrainTicketBooking.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Properties for SignInManager
         /// </summary>
         public ApplicationSignInManager SignInManager
         {
@@ -52,7 +52,7 @@ namespace TrainTicketBooking.Controllers
         }
 
         /// <summary>
-        /// 
+        /// properties for UserManager.
         /// </summary>
         public ApplicationUserManager UserManager
         {
@@ -65,14 +65,12 @@ namespace TrainTicketBooking.Controllers
                 _userManager = value;
             }
         }
-
-        //
-        // GET: /Account/Login
+        
         /// <summary>
-        /// 
+        /// return view based on actionResult.
         /// </summary>
         /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <returns>The login View.</returns>
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -135,14 +133,12 @@ namespace TrainTicketBooking.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
-        //
-        // POST: /Account/VerifyCode
+        
         /// <summary>
-        /// 
+        /// Verdify the code based on the model.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">The values of verifyCodeViewModel</param>
+        /// <returns>return the model context to veiw.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -170,26 +166,22 @@ namespace TrainTicketBooking.Controllers
                     return View(model);
             }
         }
-
-        //
-        // GET: /Account/Register
+        
         /// <summary>
-        /// 
+        /// Return view based on ActionResult.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The view for register.</returns>
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
-
-        //
-        // POST: /Account/Register
+        
         /// <summary>
-        /// 
+        /// Register a new account.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">the registerViewModel</param>
+        /// <returns>The context model to view.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -217,15 +209,13 @@ namespace TrainTicketBooking.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        //
-        // GET: /Account/ConfirmEmail
+        
         /// <summary>
-        /// 
+        /// Email confirmation code.
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="code"></param>
-        /// <returns></returns>
+        /// <returns>The result of ConfirmEmail.</returns>
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -236,26 +226,22 @@ namespace TrainTicketBooking.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-
-        //
-        // GET: /Account/ForgotPassword
+        
         /// <summary>
-        /// 
+        /// Based on Action result return view.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return the view for forgot password.</returns>
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
-
-        //
-        // POST: /Account/ForgotPassword
+        
         /// <summary>
-        /// 
+        /// Desides what to place in forgot password view.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>return to view the model of forgotten password.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -281,39 +267,33 @@ namespace TrainTicketBooking.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+        
         /// <summary>
-        /// 
+        /// Return view based on ActionResult.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>return view for forgotten password.</returns>
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
-
-        //
-        // GET: /Account/ResetPassword
+        
         /// <summary>
-        /// 
+        /// returns ResetPassword code.
         /// </summary>
         /// <param name="code"></param>
-        /// <returns></returns>
+        /// <returns>code of resetPassword.</returns>
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
-
-        //
-        // POST: /Account/ResetPassword
+        
         /// <summary>
-        /// 
+        /// Reset Password based on model.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">values in ResetPasswordViewModel.</param>
+        /// <returns>returns the view.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -337,13 +317,11 @@ namespace TrainTicketBooking.Controllers
             AddErrors(result);
             return View();
         }
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
+        
         /// <summary>
-        /// 
+        /// Returnes view based on ActionResult.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ResetPasswordConfirmation view.</returns>
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
@@ -387,11 +365,9 @@ namespace TrainTicketBooking.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
-        //
-        // POST: /Account/SendCode
+        
         /// <summary>
-        /// 
+        /// Redirects to view based on validation.
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -412,14 +388,12 @@ namespace TrainTicketBooking.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-
-        //
-        // GET: /Account/ExternalLoginCallback
+        
         /// <summary>
-        /// 
+        /// Authenticate and responds if user has an account or not and return corresponding view.
         /// </summary>
         /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <returns>View corresponding to the callback.</returns>
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -448,14 +422,12 @@ namespace TrainTicketBooking.Controllers
             }
         }
 
-        //
-        // POST: /Account/ExternalLoginConfirmation
         /// <summary>
-        /// 
+        /// confirm external login.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <returns>return context model to view.</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -491,13 +463,11 @@ namespace TrainTicketBooking.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
-        //
-        // POST: /Account/LogOff
+        
         /// <summary>
-        /// 
+        /// Authenticate logoff after Action.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>redirect to home index.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -505,13 +475,11 @@ namespace TrainTicketBooking.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-
-        //
-        // GET: /Account/ExternalLoginFailure
+        
         /// <summary>
-        /// 
+        /// Baed on Action return ExternalLogniFailure to view.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ExternalLoginFailure to view.</returns>
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {

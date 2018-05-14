@@ -14,22 +14,34 @@ using static TrainTicketBooking.ApplicationSignInManager;
 
 namespace TrainTicketBooking.Controllers
 {
+    /// <summary>
+    /// Controller for hhtp and db action for the application role admin.
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class ApplicationRolesController : Controller
     {
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
+
         public ApplicationRolesController()
         {
 
         }
+
+        /// <summary>
+        /// sets the UserManager and RoleManager values.
+        /// </summary>
+        /// <param name="userManager">Name for the userManager</param>
+        /// <param name="roleManager">Name for the roleManager</param>
         public ApplicationRolesController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
             RoleManager = roleManager;
         }
 
-
+        /// <summary>
+        /// Properties for member _roleManager.
+        /// </summary>
         public ApplicationRoleManager RoleManager
         {
             get
@@ -41,6 +53,10 @@ namespace TrainTicketBooking.Controllers
                 _roleManager = value;
             }
         }
+
+        /// <summary>
+        /// Properties for member _userManager.
+        /// </summary>
         public ApplicationUserManager UserManager
         {
             get
@@ -53,13 +69,20 @@ namespace TrainTicketBooking.Controllers
             }
         }
 
-        // GET: ApplicationRoles
+        /// <summary>
+        /// Returnes the applicationRoles to index view.
+        /// </summary>
+        /// <returns>index view.</returns>
         public ActionResult Index()
         {
             return View(RoleManager.Roles.ToList());
         }
-
-        // GET: ApplicationRoles/Details/5
+        
+        /// <summary>
+        /// Check if details of applicatonRoles can be found based on Id.
+        /// </summary>
+        /// <param name="id">Id corresponds to PK in database.</param>
+        /// <returns>details of applicationRoles</returns>
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
@@ -75,14 +98,23 @@ namespace TrainTicketBooking.Controllers
         }
 
         // GET: ApplicationRoles/Create
+        /// <summary>
+        /// Return the create view for applicationRoles.
+        /// </summary>
+        /// <returns>Create View.</returns>
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: ApplicationRoles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// Creates a new ApplicationRoles.
+        /// 
+        /// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        /// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="applicationRoleVm">Model based on the ApplicationRoleVM</param>
+        /// <returns>View.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Name")] ApplicationRoleVM applicationRoleVm)
@@ -103,8 +135,12 @@ namespace TrainTicketBooking.Controllers
 
             return View();
         }
-
-        //GET: ApplicationRoles/Edit/5
+        
+        /// <summary>
+        /// Check if it databaseobject is found based on Id.
+        /// </summary>
+        /// <param name="id">Id corresponds to PK in database.</param>
+        /// <returns></returns>
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
@@ -123,10 +159,15 @@ namespace TrainTicketBooking.Controllers
             };
             return View(applicationRoleVM);
         }
-
-        // POST: ApplicationRoles/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// Edit ApplicationRole.
+        /// 
+        /// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        /// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// </summary>
+        /// <param name="applicationRoleVM">Model that desides what values to use.</param>
+        /// <returns>applicationRoleVM to view.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] ApplicationRoleVM applicationRoleVM)
@@ -153,6 +194,11 @@ namespace TrainTicketBooking.Controllers
         }
 
         // GET: ApplicationRoles/Delete/5
+        /// <summary>
+        /// Check if database object is found base on Id.
+        /// </summary>
+        /// <param name="id">Id corresponds to Pk in database.</param>
+        /// <returns></returns>
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -166,8 +212,12 @@ namespace TrainTicketBooking.Controllers
             }
             return View(applicationRole);
         }
-
-        // POST: ApplicationRoles/Delete/5
+        
+        /// <summary>
+        /// Confirm and validate delete of ApplicationRole based on id.
+        /// </summary>
+        /// <param name="id">Id corresponds to pk in database.</param>
+        /// <returns>Index view.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
@@ -182,6 +232,10 @@ namespace TrainTicketBooking.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Dispose unmanaged RoleManagers.
+        /// </summary>
+        /// <param name="disposing">Bool value true or false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
